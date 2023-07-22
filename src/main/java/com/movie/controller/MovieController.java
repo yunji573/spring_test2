@@ -305,7 +305,7 @@ public class MovieController {
 		
 	}
 	
-	
+	//민영수정
 	
 	
 }
