@@ -305,7 +305,7 @@ public class MovieController {
 		
 	}
 	
-	//윤지테스트 
+	//윤지테스트 + 윤지수정
 	
 	
 }
