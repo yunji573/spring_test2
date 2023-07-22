@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org/DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"></setting>
+	</settings>
+	<typeAliases>
+		<typeAlias alias="userDTO" type="com.movie.model.UserDTO" />
+ 		<typeAlias alias="movieDTO" type="com.movie.model.MovieDTO" />
+ 		<typeAlias alias="AttachedDTO" type="com.movie.model.AttachedDTO" />
+ 		<typeAlias alias="ReviewDTO" type="com.movie.model.ReviewDTO" />
+ 		<typeAlias alias="TheaterDTO" type="com.movie.model.TheaterDTO" />
+ 		<typeAlias alias="ShowTimeDTO" type="com.movie.model.ShowTimeDTO" />
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="mappers/UserMapper.xml" />
+	 	<mapper resource="mappers/MovieMapper.xml" />
+	 	<mapper resource="mappers/AttachMapper.xml" />
+	 	<mapper resource="mappers/ReviewMapper.xml" />
+	 	<mapper resource="mappers/TheaterMapper.xml" />
+	 	<mapper resource="mappers/ShowTimeMapper.xml" />
+	</mappers>
+</configuration>

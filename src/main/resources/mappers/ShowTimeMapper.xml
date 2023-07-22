@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movie.mapper.ShowTimeMapper">
+
+
+	<update id="update" parameterType="showTimeDTO">
+		update `showtime` set
+		`time` =
+		#{time}, `startDate` =#{startDate},`endDate`=#{endDate}
+
+		WHERE `id` =${id}
+	</update>
+
+
+
+	<insert id="insert" parameterType="arrayList"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO showtime(movieId, theaterId, time, startDate, endDate)
+		VALUES
+		<foreach collection="list" item="item" separator=",">
+			(#{item.movieId},#{item.theaterId},#{item.time},
+			#{item.startDate},#{item.endDate})
+		</foreach>
+	</insert>
+
+
+	<select id="selectAll" resultType="ShowTimeDTO">
+		SELECT DISTINCT
+		showtime.movieId, showtime.theaterId, theater.name as
+		theatername,
+		movie.title as title
+		FROM showtime
+		LEFT JOIN theater ON
+		showtime.theaterId = theater.id
+		LEFT JOIN movie ON showtime.movieId
+		=movie.id;
+
+	</select>
+
+
+	<delete id="delete" parameterType="integer">
+		delete from `showtime` WHERE
+		`id`= ${id}
+	</delete>
+
+	<select id="selectOne" parameterType="integer"
+		resultType="showTimeDTO">
+		SELECT showtime.*, showtime.theaterId, theater.name as
+		theatername,
+		movie.title as title
+		FROM showtime
+		LEFT JOIN theater ON
+		showtime.theaterId = theater.id
+		LEFT JOIN movie ON showtime.movieId =
+		movie.id where
+		`showtime`.`id`=${id}
+	</select>
+
+	<select id="selectAll2" resultType="showtimeDTO"
+		parameterType="hashMap">
+		SELECT showtime.*, showtime.theaterId, theater.name as
+		theatername,
+		movie.title as title
+		FROM showtime
+		LEFT JOIN theater ON
+		showtime.theaterId = theater.id
+		LEFT JOIN movie ON showtime.movieId =
+		movie.id
+		LIMIT ${startRow}, ${size}
+	</select>
+
+
+	<select id="count" resultType="integer">
+		SELECT COUNT(*) FROM showtime
+	</select>
+
+	
+</mapper>
