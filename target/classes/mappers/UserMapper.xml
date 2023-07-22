@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movie.mapper.UserMapper">
+
+	<!--mybatis-config.xml과 "userDTO" 같은이름을 적어줘야한다 -->
+	<select id="auth" parameterType="userDTO" resultType="userDTO">
+		SELECT *
+		FROM `user`
+		WHERE `username` = #{username}
+		AND
+		`password` = #{password}
+	</select>
+ 
+	<select id="selectOneByUsername" parameterType="userDTO"
+		resultType="userDTO">
+		select * from `user`
+		where `username` = #{username}
+	</select>
+
+	<select id="register" parameterType="userDTO">
+		insert into
+		`user`(`username`,`password`,`nickname`,`entry_date`,`modify_date`)
+		values(#{username}, #{password}, #{nickname}, NOW(), NOW())
+	</select>
+
+	<update id="update" parameterType="userDTO">
+		UPDATE user
+		SET
+		password =
+		#{password}
+		WHERE id = ${id}
+	</update>
+
+	<update id="roleUpdate" parameterType="userDTO">
+		UPDATE user
+		SET
+		role =
+		#{role}
+		WHERE id = ${id}
+	</update>
+
+	<select id="selectAll" resultType="userDTO">
+		SELECT * FROM user
+	</select>
+
+	<select id="selectAll2" resultType="userDTO"
+		parameterType="hashMap">
+		SELECT *FROM `user`
+		ORDER BY id DESC
+		LIMIT ${startRow}, ${size}
+	</select>
+
+
+	<select id="count" resultType="integer">
+		SELECT COUNT(*) FROM user
+	</select>
+
+</mapper>
