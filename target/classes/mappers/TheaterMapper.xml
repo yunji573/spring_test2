@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movie.mapper.TheaterMapper">
+
+	<insert id="insert" parameterType="TheaterDTO"
+		useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		insert into
+		`theater`(`name`,`location`,`phone`)
+		values(#{name},
+		#{location},#{phone})
+	</insert>
+
+	<select id="selectAll" resultType="TheaterDTO"
+		parameterType="hashMap">
+		SELECT * FROM `theater`
+		ORDER BY id DESC
+		LIMIT
+		${startRow}, ${size}
+	</select>
+
+	<select id="selectbytheater" parameterType="integer"
+		resultType="TheaterDTO">
+		SELECT m.title, s.time, s.startDate, s.endDate
+		FROM showtime
+		s
+		INNER JOIN movie m ON s.movieId = m.id
+		WHERE s.theaterId
+		=${id} AND
+		CURDATE()>=s.startDate AND s.endDate >=CURDATE()
+	</select>
+	<select id="count" resultType="integer">
+		SELECT COUNT(*) FROM theater
+	</select>
+
+	<select id="selectOne" parameterType="integer"
+		resultType="theaterDTO">
+		SELECT * FROM theater where `theater`.`id`=${id}
+	</select>
+
+	<update id="update" parameterType="TheaterDTO">
+		update theater set `name` =#{name}, `location`=#{location},
+		`phone`=#{phone}
+		where `id`= ${id}
+	</update>
+
+	<delete id="delete" parameterType="integer">
+		delete from `theater` WHERE
+		`id`= ${id}
+	</delete>
+
+</mapper>
