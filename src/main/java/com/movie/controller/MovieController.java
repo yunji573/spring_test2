@@ -305,7 +305,11 @@ public class MovieController {
 		
 	}
 	
+<<<<<<< HEAD
 	//민영수정
+=======
+	//윤지테스트 + 윤지수정
+>>>>>>> f5f206da4ef5a230b7f6d1d597498acfab2353a6
 	
 	
 }
